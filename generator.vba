@@ -10,8 +10,8 @@ Sub GeneratePDFsFromCSV()
     Application.ScreenUpdating = False
 
     ' Set references to worksheets
-    Set wsData = ThisWorkbook.Sheets("Sheet1") ' Change "Sheet1" to your CSV data sheet name
-    Set wsTemplate = ThisWorkbook.Sheets("Sheet2") ' Change "Sheet2" to your template sheet name
+    Set wsData = ThisWorkbook.Sheets("Duomenys") ' Change "Duomenys" to your CSV data sheet name
+    Set wsTemplate = ThisWorkbook.Sheets("Sablonas") ' Change "Sablonas" to your template sheet name
 
     ' Find the last row with data in the CSV data sheet
     lastRow = wsData.Cells(wsData.Rows.Count, 1).End(xlUp).Row
