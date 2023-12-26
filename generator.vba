@@ -1,7 +1,13 @@
+Option Explicit ' Declare variables as Dim before use
+
 Sub GeneratePDFsFromCSV()
+    On Error GoTo ErrorHandler ' Enable error handling
+
     Dim wsData As Worksheet
     Dim wsTemplate As Worksheet
     Dim lastRow As Long
+    Dim i As Long
+	Dim j As Long
     Dim pdfPath As String
     Dim pdfName As String
     Dim pdfFullPath As String
@@ -16,10 +22,7 @@ Sub GeneratePDFsFromCSV()
     ' Find the last row with data in the CSV data sheet
     lastRow = wsData.Cells(wsData.Rows.Count, 1).End(xlUp).Row
 
-    ' Set the PDF path to the workbook's directory with "generated-" prefix and current timestamp
-    pdfPath = ThisWorkbook.Path & "\generated-" & Format(Now, "yyyy-MM-dd__HH-mm-ss") & "\"
-
-    ' Set the PDF path to the workbook's directory with "generated-" prefix, current timestamp and Excel filename.
+    ' Set the PDF path to the workbook's directory with "generated-" prefix, current timestamp, and Excel filename.
     pdfPath = ThisWorkbook.Path & "\" & "generated-" & Format(Now, "yyyy-MM-dd__HH-mm-ss") & "--" & ThisWorkbook.Name & "\"
 
     ' Check if the folder exists, and create it if not
@@ -47,5 +50,12 @@ Sub GeneratePDFsFromCSV()
 
     ' Display a message when the process is complete
     MsgBox "PDFs generated successfully!", vbInformation
+
+    Exit Sub ' Exit the subroutine if everything executed successfully
+
+ErrorHandler:
+    ' Handle errors here (e.g., display a message or log the error)
+    MsgBox "An error occurred: " & Err.Description, vbExclamation
+    Application.ScreenUpdating = True ' Ensure screen updating is enabled even in case of an error
 End Sub
 
